@@ -14,14 +14,21 @@ function App() {
   }
 
   const HandleDelete = (e)=>{
-    let id = e.target.id;
-    Todos.filter(item=>{
+    let id = e.target.name;
+    let ne = Todos.filter(item=>{
       return id!=item.id
     })
+
+    setTodos(ne)
   }
 
-  const HandleEdit = ()=>{
-    
+  const HandleEdit = (e)=>{
+    let id = e.target.id;
+    let ne = Todos.filter(item=>{
+      return id!=item.id
+    })
+    setTodo(e.target.text)
+    setTodos(ne)
   }
 
   const HandleChange = (e)=>{
@@ -54,11 +61,11 @@ function App() {
           <div className="todos">
 
           {Todos.map(item =>{           
-              return <div key={item.id} className="todo">
-                <input name={item.id} type='checkbox' onChange={HandleCheck}/>
-              <label className={item.isComp?'m-2 line-through ':"m-2"}>{item.Todo}</label>
-              <button className='bg-violet-700 p-2 rounded-xl hover:bg-violet-900 text-white m-2' onClick={HandleDelete}>Delete</button>
-              <button className='bg-violet-700 p-2 rounded-xl hover:bg-violet-900 text-white m-2' onClick={HandleEdit}>Edit</button>
+              return <div key={item.id} className="todo" > 
+                <input name={item.id} type='checkbox' text={item.Todo} onChange={HandleCheck}/>
+              <label className={item.isComp?'m-2 line-through ':"m-2"} text={item.Todo}>{item.Todo}</label>
+              <button className='bg-violet-700 p-2 rounded-xl hover:bg-violet-900 text-white m-2' onClick={HandleDelete}text={item.Todo}name={item.id}>Delete</button>
+              <button text={item.Todo} className='bg-violet-700 p-2 rounded-xl hover:bg-violet-900 text-white m-2' onClick={HandleEdit}name={item.id}>Edit</button>
             </div>
             })}
 
